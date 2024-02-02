@@ -86,8 +86,8 @@ export default {
       <el-input-number class="startingCounter" v-if="showStartingCountInput" v-model="startingCount" />
 
       <el-button-group>
-        <el-button type="success" :icon="Check" circle plain @click="setStartingCount" />
         <el-button type="danger" :icon="Close" circle plain @click="toggleStartingCountInput" />
+        <el-button type="success" :icon="Check" circle plain @click="setStartingCount" />
       </el-button-group>
     </template>
 
