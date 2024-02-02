@@ -83,28 +83,51 @@ export default {
     <div class="flex-grow" />
 
     <template v-if="showStartingCountInput">
-      <el-input-number class="startingCounter" v-if="showStartingCountInput" v-model="startingCount" />
+      <el-input-number class="startingCountInput" v-if="showStartingCountInput" v-model="startingCount" />
 
       <el-button-group>
-        <el-button type="danger" :icon="Close" circle plain @click="toggleStartingCountInput" />
-        <el-button type="success" :icon="Check" circle plain @click="setStartingCount" />
+        <el-button class="incrementStartingCount" type="danger" :icon="Close" circle plain
+          @click="toggleStartingCountInput" />
+        <el-button class="incrementStartingCount" type="success" :icon="Check" circle plain @click="setStartingCount" />
       </el-button-group>
     </template>
 
-    <el-button v-else round @click="toggleStartingCountInput">Set starting count</el-button>
+    <el-button v-else class="startingCounter" round @click="toggleStartingCountInput">Set starting
+      count</el-button>
   </el-menu>
 
   <h1 class="title">daily tracker</h1>
   <el-row class="counter">
     <el-text class="count">{{ this.count }}</el-text>
     <div>
-      <el-button class="counterButton" size="large" type="danger" :icon="Minus" circle plain @click="decreaseCount" />
-      <el-button class="counterButton" size="large" type="success" :icon="Plus" circle plain @click="increaseCount" />
+      <el-button class="counterButton" type="danger" :icon="Minus" circle plain @click="decreaseCount" />
+      <el-button class="counterButton" type="success" :icon="Plus" circle plain @click="increaseCount" />
     </div>
   </el-row>
 </template>
 
 <style scoped>
+.menu {
+  display: flex;
+  align-items: center;
+  height: 80px;
+
+  .startingCounter {
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .startingCountInput {
+    margin-right: 16px;
+  }
+
+  .incrementStartingCount {
+    height: 38px;
+    width: 38px;
+    font-size: 24px;
+  }
+}
+
 .title {
   margin-bottom: 0;
   font-size: 5vh;
@@ -134,17 +157,7 @@ export default {
   }
 }
 
-.startingCounter {
-  margin-right: 16px;
-}
-
 .flex-grow {
   flex-grow: 1;
-}
-
-.menu {
-  display: flex;
-  align-items: center;
-  height: 80px;
 }
 </style>
