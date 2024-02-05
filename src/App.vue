@@ -14,6 +14,7 @@ export default {
     Plus,
 
     count: 0,
+    isDoneFetching: false,
     key: 'dailyCount2897129387491082',
     showStartingCountInput: false,
     startingCount: 0,
@@ -32,12 +33,19 @@ export default {
       }
 
       this.count = countObj.count
+      console.log(this.count)
     }
   },
 
   watch: {
     count(newCount, oldCount) {
+      if (!this.isDoneFetching) {  // Don't resave old count
+        this.isDoneFetching = true
+        return
+      }
+
       this.saveCount()
+      console.log('changed')
     }
   },
 
@@ -53,6 +61,7 @@ export default {
     },
 
     saveCount() {
+      console.log('saved!')
       // https://www.sohamkamani.com/javascript/localstorage-with-ttl-expiry
       const now = new Date()
       const ttl = 172800000 // 48 hours
@@ -79,16 +88,16 @@ export default {
 </script>
 
 <template>
-  <el-menu :default-active="activeIndex" mode="horizontal" :ellipsis="false" class="menu" @select="handleSelect">
+  <el-menu mode="horizontal" :ellipsis="false" class="menu">
     <div class="flex-grow" />
 
     <template v-if="showStartingCountInput">
-      <el-input-number v-if="showStartingCountInput" class="startingCountInput" min="0" v-model="startingCount" />
+      <el-input-number v-if="showStartingCountInput" class="startingCountInput" :min="0" v-model="startingCount" />
 
       <el-button-group>
-        <el-button class="incrementStartingCount" type="danger" :icon="Close" circle plain
+        <el-button class="incrementStartingCount" type="danger" icon="Close" circle plain
           @click="toggleStartingCountInput" />
-        <el-button class="incrementStartingCount" type="success" :icon="Check" circle plain @click="setStartingCount" />
+        <el-button class="incrementStartingCount" type="success" icon="Check" circle plain @click="setStartingCount" />
       </el-button-group>
     </template>
 
@@ -100,8 +109,8 @@ export default {
   <el-row class="counter">
     <el-text class="count">{{ this.count }}</el-text>
     <div>
-      <el-button class="counterButton" type="danger" :icon="Minus" circle plain @click="decreaseCount" />
-      <el-button class="counterButton" type="success" :icon="Plus" circle plain @click="increaseCount" />
+      <el-button class="counterButton" type="danger" icon="Minus" circle plain @click="decreaseCount" />
+      <el-button class="counterButton" type="success" icon="Plus" circle plain @click="increaseCount" />
     </div>
   </el-row>
 </template>
