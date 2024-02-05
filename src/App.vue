@@ -83,7 +83,7 @@ export default {
     <div class="flex-grow" />
 
     <template v-if="showStartingCountInput">
-      <el-input-number class="startingCountInput" v-if="showStartingCountInput" v-model="startingCount" />
+      <el-input-number v-if="showStartingCountInput" class="startingCountInput" min="0" v-model="startingCount" />
 
       <el-button-group>
         <el-button class="incrementStartingCount" type="danger" :icon="Close" circle plain
