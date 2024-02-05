@@ -33,7 +33,6 @@ export default {
       }
 
       this.count = countObj.count
-      console.log(this.count)
     }
   },
 
@@ -45,7 +44,6 @@ export default {
       }
 
       this.saveCount()
-      console.log('changed')
     }
   },
 
@@ -61,7 +59,6 @@ export default {
     },
 
     saveCount() {
-      console.log('saved!')
       // https://www.sohamkamani.com/javascript/localstorage-with-ttl-expiry
       const now = new Date()
       const ttl = 172800000 // 48 hours
